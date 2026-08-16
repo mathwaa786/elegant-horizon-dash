@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CustomersRouteImport } from './routes/customers'
+import { Route as FinanceRouteImport } from './routes/finance'
+import { Route as MapRouteImport } from './routes/map'
+import { Route as OperationsRouteImport } from './routes/operations'
+import { Route as PropertiesRouteImport } from './routes/properties'
+import { Route as ReservationsRouteImport } from './routes/reservations'
+import { Route as UnitsRouteImport } from './routes/units'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CustomersRoute = CustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceRoute = FinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapRoute = MapRouteImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OperationsRoute = OperationsRouteImport.update({
+  id: '/operations',
+  path: '/operations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PropertiesRoute = PropertiesRouteImport.update({
+  id: '/properties',
+  path: '/properties',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReservationsRoute = ReservationsRouteImport.update({
+  id: '/reservations',
+  path: '/reservations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnitsRoute = UnitsRouteImport.update({
+  id: '/units',
+  path: '/units',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/customers': typeof CustomersRoute
+  '/finance': typeof FinanceRoute
+  '/map': typeof MapRoute
+  '/operations': typeof OperationsRoute
+  '/properties': typeof PropertiesRoute
+  '/reservations': typeof ReservationsRoute
+  '/units': typeof UnitsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/customers': typeof CustomersRoute
+  '/finance': typeof FinanceRoute
+  '/map': typeof MapRoute
+  '/operations': typeof OperationsRoute
+  '/properties': typeof PropertiesRoute
+  '/reservations': typeof ReservationsRoute
+  '/units': typeof UnitsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/customers': typeof CustomersRoute
+  '/finance': typeof FinanceRoute
+  '/map': typeof MapRoute
+  '/operations': typeof OperationsRoute
+  '/properties': typeof PropertiesRoute
+  '/reservations': typeof ReservationsRoute
+  '/units': typeof UnitsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/customers'
+    | '/finance'
+    | '/map'
+    | '/operations'
+    | '/properties'
+    | '/reservations'
+    | '/units'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/customers'
+    | '/finance'
+    | '/map'
+    | '/operations'
+    | '/properties'
+    | '/reservations'
+    | '/units'
+  id:
+    | '__root__'
+    | '/'
+    | '/customers'
+    | '/finance'
+    | '/map'
+    | '/operations'
+    | '/properties'
+    | '/reservations'
+    | '/units'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CustomersRoute: typeof CustomersRoute
+  FinanceRoute: typeof FinanceRoute
+  MapRoute: typeof MapRoute
+  OperationsRoute: typeof OperationsRoute
+  PropertiesRoute: typeof PropertiesRoute
+  ReservationsRoute: typeof ReservationsRoute
+  UnitsRoute: typeof UnitsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/customers': {
+      id: '/customers'
+      path: '/customers'
+      fullPath: '/customers'
+      preLoaderRoute: typeof CustomersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finance': {
+      id: '/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof FinanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/map': {
+      id: '/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof MapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/operations': {
+      id: '/operations'
+      path: '/operations'
+      fullPath: '/operations'
+      preLoaderRoute: typeof OperationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/properties': {
+      id: '/properties'
+      path: '/properties'
+      fullPath: '/properties'
+      preLoaderRoute: typeof PropertiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reservations': {
+      id: '/reservations'
+      path: '/reservations'
+      fullPath: '/reservations'
+      preLoaderRoute: typeof ReservationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/units': {
+      id: '/units'
+      path: '/units'
+      fullPath: '/units'
+      preLoaderRoute: typeof UnitsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CustomersRoute: CustomersRoute,
+  FinanceRoute: FinanceRoute,
+  MapRoute: MapRoute,
+  OperationsRoute: OperationsRoute,
+  PropertiesRoute: PropertiesRoute,
+  ReservationsRoute: ReservationsRoute,
+  UnitsRoute: UnitsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
