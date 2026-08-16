@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CustomersRouteImport } from './routes/customers'
+import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as MapRouteImport } from './routes/map'
 import { Route as PropertiesRouteImport } from './routes/properties'
 import { Route as ReservationsRouteImport } from './routes/reservations'
@@ -24,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
 const CustomersRoute = CustomersRouteImport.update({
   id: '/customers',
   path: '/customers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceRoute = FinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MapRoute = MapRouteImport.update({
@@ -50,6 +56,7 @@ const UnitsRoute = UnitsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/customers': typeof CustomersRoute
+  '/finance': typeof FinanceRoute
   '/map': typeof MapRoute
   '/properties': typeof PropertiesRoute
   '/reservations': typeof ReservationsRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/customers': typeof CustomersRoute
+  '/finance': typeof FinanceRoute
   '/map': typeof MapRoute
   '/properties': typeof PropertiesRoute
   '/reservations': typeof ReservationsRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/customers': typeof CustomersRoute
+  '/finance': typeof FinanceRoute
   '/map': typeof MapRoute
   '/properties': typeof PropertiesRoute
   '/reservations': typeof ReservationsRoute
@@ -75,13 +84,27 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/customers' | '/map' | '/properties' | '/reservations' | '/units'
+    | '/'
+    | '/customers'
+    | '/finance'
+    | '/map'
+    | '/properties'
+    | '/reservations'
+    | '/units'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/customers' | '/map' | '/properties' | '/reservations' | '/units'
+  to:
+    | '/'
+    | '/customers'
+    | '/finance'
+    | '/map'
+    | '/properties'
+    | '/reservations'
+    | '/units'
   id:
     | '__root__'
     | '/'
     | '/customers'
+    | '/finance'
     | '/map'
     | '/properties'
     | '/reservations'
@@ -91,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CustomersRoute: typeof CustomersRoute
+  FinanceRoute: typeof FinanceRoute
   MapRoute: typeof MapRoute
   PropertiesRoute: typeof PropertiesRoute
   ReservationsRoute: typeof ReservationsRoute
@@ -111,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/customers'
       fullPath: '/customers'
       preLoaderRoute: typeof CustomersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finance': {
+      id: '/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof FinanceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/map': {
@@ -147,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CustomersRoute: CustomersRoute,
+  FinanceRoute: FinanceRoute,
   MapRoute: MapRoute,
   PropertiesRoute: PropertiesRoute,
   ReservationsRoute: ReservationsRoute,
