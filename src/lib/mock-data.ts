@@ -97,19 +97,20 @@ export const units: Unit[] = Array.from({ length: 64 }, (_, i) => {
     "Occupied", "Occupied", "Occupied", "Occupied", "Occupied",
     "Vacant", "Reserved", "Maintenance",
   ];
-  const status = statusPool[i % statusPool.length];
-  const property = properties[i % properties.length];
-  return {
+  const status = statusPool[i % statusPool.length]!;
+  const property = properties[i % properties.length]!;
+  const unit: Unit = {
     id: `${property.id}-${String(101 + i)}`,
     property: property.name,
     floor: (i % 12) + 1,
-    type: unitTypes[i % unitTypes.length],
+    type: unitTypes[i % unitTypes.length]!,
     beds: (i % 4) + 1,
     sqm: 42 + (i % 9) * 14,
     rent: 1450 + (i % 11) * 240,
     status,
-    tenant: status === "Occupied" ? tenantNames[i % tenantNames.length] : undefined,
   };
+  if (status === "Occupied") unit.tenant = tenantNames[i % tenantNames.length]!;
+  return unit;
 });
 
 export type Reservation = {
